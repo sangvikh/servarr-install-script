@@ -45,6 +45,7 @@ set -euo pipefail
 # Root privilege check
 if [ "$EUID" -ne 0 ]; then
     echo -e "${RED}Please run as root!\nExiting script!${RESET}"
+    echo -e ${RESET}
     exit 1
 fi
 
@@ -118,6 +119,7 @@ if [[ "$INSTALL_DIR" == "$(dirname -- "$(readlink -f -- "$0")")" ]] ||
     echo -e "\n${RED}Error!${RESET} You should not run this script from the intended install directory."
     echo "Please re-run it from another directory."
     echo "Exiting Script!"
+    echo -e ${RESET}
     exit 1
 fi
 
@@ -145,6 +147,7 @@ read -r -p "Please type 'yes' to continue with the installation: " response
 if [[ ${response,,} != "yes" ]]; then
     echo "Invalid response. Operation is canceled!"
     echo "Exiting script!"
+    echo -e ${RESET}
     exit 0
 fi
 
@@ -213,6 +216,7 @@ case "$ARCH" in
 "arm64") DLURL="${dlbase}&arch=arm64" ;;
 *)
     echo -e "${RED}Architecture $ARCH is not supported!\nExiting installer script!${RESET}"
+    echo -e ${RESET}
     exit 1
     ;;
 esac
